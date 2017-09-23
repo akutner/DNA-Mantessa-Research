@@ -12,6 +12,7 @@ from urllib.request import urlopen
 #from geopy.geocoders import Nominatim
 #geolocator = Nominatim()
 import pytz, datetime
+import sys
 """
 def findCounty(longitude, latitude):
     location = geolocator.reverse(longitude+","+latitude)
@@ -47,12 +48,14 @@ def getComponents(lon,lat,numRequests):
         quitAndSave()
         if numRequests>10:
             quitAndSave();
-        getComponents(lon,lat,numRequests)
+            sys.exit()
+            
+        components = getComponents(lon,lat,numRequests)
 
     return components
 def quitAndSave():
     with open('ipData.json','w') as outfile:
-                json.dump(countiesCustomers,outfile)
+        json.dump(countiesCustomers,outfile)
 
 def makeStdTime(tm):
     gmt = pytz.timezone('GMT')
